@@ -34,8 +34,7 @@ const data = {
 };
 const BarChart = () => {
   return (
-    <div style={{ width: '1000px', height: '700px' }}>
-      <h1>Example 2: Bar Chart</h1>
+    <div style={{ width: '500px', height: '500px' }}>
       <Bar data={data} />
     </div>
   );

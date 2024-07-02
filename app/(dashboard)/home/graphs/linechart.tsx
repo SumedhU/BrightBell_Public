@@ -18,8 +18,7 @@ const data = {
 };
 const LineChart = () => {
   return (
-    <div style={{ width: '700px', height: '700px' }}>
-      <h1>Weight Chart</h1>
+    <div style={{ width: '500px', height: '500px' }}>
       <Line data={data} />
     </div>
   );
