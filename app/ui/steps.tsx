@@ -7,7 +7,7 @@ const steps = [
     { id: '04', name: 'Goals', href: '/signup/application/goals', status: 'upcoming' },
   ]
 
-  export default function Example() {
+  export default function Steps() {
     return (
       <nav aria-label="Progress">
         <ol role="list" className="divide-y divide-gray-300 rounded-md border border-gray-300 md:flex md:divide-y-0">

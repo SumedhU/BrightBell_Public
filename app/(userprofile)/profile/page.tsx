@@ -1,8 +1,33 @@
-import { PaperClipIcon } from '@heroicons/react/20/solid'
+'use client';
 import Link from 'next/link'
+import axios from 'axios';
+import { useState, useEffect } from 'react';
 
-export default function Profile() {
+
+export default async function Profile(){
+
+  const sendGetRequest = async () => {
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+  
+      const response = await axios.get('/api/profile', config);
+  
+      console.log('aaa', response.data);
+    } catch (err) {
+      // Handle Error Here
+      console.error(err);
+    }
+  };
+  
+  useEffect(() => {
+    sendGetRequest();
+  }, []);
   return (
+   
     <div>
       <div className="px-4 sm:px-0">
         <h3 className="text-base font-semibold leading-7 text-gray-900">Fitness Enthusiast's Information</h3>
