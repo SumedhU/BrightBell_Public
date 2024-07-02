@@ -2,7 +2,6 @@
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { parseCookies } from 'nookies';
 import BarChart from "./graphs/barchart";
 import DoughnutChart from "./graphs/doughnutChart";
 import LineChart from "./graphs/linechart";
@@ -11,9 +10,9 @@ export default function Home() {
   const router = useRouter();
 
   useEffect(() => {
-    const cookies = parseCookies();
-    console.log('Checking cookies:', cookies);
-    if (!cookies.auth) {
+    const authToken = localStorage.getItem('authToken');
+    console.log('Checking authToken:', authToken);
+    if (!authToken) {
       router.push('/login');
     }
   }, [router]);

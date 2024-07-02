@@ -1,7 +1,20 @@
+"use client";
 
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import Feed from "./feed";
 import Heatmap from "@/app/ui/heatmap";
 export default function History() {
+
+  const router = useRouter();
+
+  useEffect(() => {
+    const authToken = localStorage.getItem('authToken');
+    console.log('Checking authToken:', authToken);
+    if (!authToken) {
+      router.push('/login');
+    }
+  }, [router]);
     return (
       <>
         <header>

@@ -1,5 +1,16 @@
+"use client";
 
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 export default function Log() {
+  const router = useRouter();
+  useEffect(() => {
+    const authToken = localStorage.getItem('authToken');
+    console.log('Checking authToken:', authToken);
+    if (!authToken) {
+      router.push('/login');
+    }
+  }, [router]);
   return (
     <>
       <header>
