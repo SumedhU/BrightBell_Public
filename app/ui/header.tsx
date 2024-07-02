@@ -44,9 +44,10 @@ export default function Header() {
 
   const handleSignOut = () => {
     const cookie = serialize('auth', "", { path: '/', httpOnly: true, maxAge: -3600 });
-    const response = NextResponse.json({ message: 'Login successful' });
-    response.headers.set('Set-Cookie', cookie);    
-    // router.push('/login');
+    destroyCookie(null, 'auth', { path: '/' });
+    const response = NextResponse.json({ message: 'Logout successful' });
+    //response.headers.set('Set-Cookie', cookie);    
+     router.push('/login');
   };
 
   return (

@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { hash } from 'bcryptjs';
-import clientPromise from '../../../mongodb';
+import clientPromise from '../../../app/mongodb';
 
 export async function POST(req: NextRequest) {
-    const { full_name, email, password, about, current_weight, starting_weight, goal_weight, water_intake, workout_routine } = await req.json();
+    const { firstname, lastname,email,phone,username,password, about, currentweight, startweight, goalweight, waterintake, workoutIntensity } = await req.json();
 
     const client = await clientPromise;
     const db = client.db();
@@ -19,15 +19,18 @@ export async function POST(req: NextRequest) {
 
     // Create a new user
     const newUser = {
-        full_name,
+        firstname,
+        lastname,
         email,
+        phone,
+        username,
         password: hashedPassword,
         about,
-        current_weight,
-        starting_weight,
-        goal_weight,
-        water_intake,
-        workout_routine
+        currentweight,
+        startweight,
+        goalweight,
+        waterintake,
+        workoutIntensity
     };
 
     // Store the new user in the database
