@@ -4,24 +4,29 @@ import { Label, Listbox, ListboxButton, ListboxOption, ListboxOptions, Transitio
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 
 const workout = [
-  { id: 1, name: '1 Session per Week', intensity : "Beginner", },
-  { id: 2, name: '2 Session per Week', intensity : "Beginner",},
-  { id: 3, name: '3 Session per Week', intensity : "Healthy",  },
-  { id: 4, name: '4 Session per Week', intensity : "Healthy", },
-  { id: 5, name: '5 Session per Week', intensity : "Pro", },
-  { id: 6, name: '6 Session per Week', intensity : "Pro", },
-  { id: 7, name: '7 Session per Week', intensity : "Dangerous", },
+  { id: 1, name: '1 Session per Week', intensity: "Beginner" },
+  { id: 2, name: '2 Session per Week', intensity: "Beginner" },
+  { id: 3, name: '3 Session per Week', intensity: "Healthy" },
+  { id: 4, name: '4 Session per Week', intensity: "Healthy" },
+  { id: 5, name: '5 Session per Week', intensity: "Pro" },
+  { id: 6, name: '6 Session per Week', intensity: "Pro" },
+  { id: 7, name: '7 Session per Week', intensity: "Dangerous" },
 ]
 
 function classNames(...classes: (string | undefined | null)[]): string {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function WorkoutIntensity() {
-  const [selected, setSelected] = useState(workout[3])
+export default function WorkoutIntensity({ onChange }: { onChange: (newIntensity: string) => void }) {
+  const [selected, setSelected] = useState(workout[3]);
+
+  const handleChange = (selectedOption: typeof workout[0]) => {
+    setSelected(selectedOption);
+    onChange(selectedOption.intensity); // Call the onChange prop with the selected intensity
+  };
 
   return (
-    <Listbox value={selected} onChange={setSelected}>
+    <Listbox value={selected} onChange={handleChange}>
       {({ open }) => (
         <>
           <Label className="block text-sm font-medium leading-6 text-gray-900">Workout Intensity</Label>
@@ -38,16 +43,15 @@ export default function WorkoutIntensity() {
                 {workout.map((person) => (
                   <ListboxOption
                     key={person.id}
-                    className={({ focus }) =>
+                    className={({ active }) =>
                       classNames(
-                        focus ? 'bg-indigo-600 text-white' : '',
-                        !focus ? 'text-gray-900' : '',
+                        active ? 'bg-indigo-600 text-white' : 'text-gray-900',
                         'relative cursor-default select-none py-2 pl-3 pr-9'
                       )
                     }
                     value={person}
                   >
-                    {({ selected, focus }) => (
+                    {({ selected, active }) => (
                       <>
                         <span className={classNames(selected ? 'font-semibold' : 'font-normal', 'block truncate')}>
                           {person.name}
@@ -56,7 +60,7 @@ export default function WorkoutIntensity() {
                         {selected ? (
                           <span
                             className={classNames(
-                              focus ? 'text-white' : 'text-indigo-600',
+                              active ? 'text-white' : 'text-indigo-600',
                               'absolute inset-y-0 right-0 flex items-center pr-4'
                             )}
                           >

@@ -1,29 +1,39 @@
-'use client';
+"use client";
+
 import React, { useState, FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
 
 export default function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
     const router = useRouter();
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
+
+        try {
             const res = await fetch('/api/login', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ email, password })
+                body: JSON.stringify({ email, password }),
             });
 
+            const data = await res.json();
+
             if (!res.ok) {
-                throw new Error('Failed to fetch data');
+                setError(data.error || 'An unexpected error occurred');
+                return;
             }
 
-            const data = await res.json();
             console.log(data.message);
-            router.push('/home')
+            router.push('/home');
+        } catch (error) {
+            setError('An unexpected error occurred');
+            console.error(error);
+        }
     };
 
     return (
@@ -65,11 +75,6 @@ export default function Login() {
                                 <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
                                     Password
                                 </label>
-                                {/* <div className="text-sm">
-                                    <a href="/resetpassword" className="font-semibold text-indigo-600 hover:text-indigo-500">
-                                        Forgot password?
-                                    </a>
-                                </div> */}
                             </div>
                             <div className="mt-2">
                                 <input
@@ -84,6 +89,8 @@ export default function Login() {
                                 />
                             </div>
                         </div>
+
+                        {error && <p className="text-red-500 text-sm">{error}</p>}
 
                         <div>
                             <button

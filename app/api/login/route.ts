@@ -18,6 +18,7 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ error: 'User not found' }, { status: 400 });
         }
 
+        
         const isPasswordValid = await compare(password, user.password);
         if (!isPasswordValid) {
             return NextResponse.json({ error: 'Invalid password' }, { status: 400 });
@@ -28,9 +29,11 @@ export async function POST(req: NextRequest) {
         const cookie = serialize('auth', token, { path: '/', httpOnly: true, maxAge: 3600 });
         const response = NextResponse.json({ message: 'Login successful' });
         response.headers.set('Set-Cookie', cookie);
-        response.headers.set('Location', '/home');
+
+        console.log('Login successful, cookie set:', cookie);
         return response;
     } catch (error) {
+        console.error('Error during login:', error);
         return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
     }
 }
