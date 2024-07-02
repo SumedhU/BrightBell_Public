@@ -206,14 +206,14 @@ export default function Settings() {
                 </div>
             </div>
             <div className="sm:col-span-1">
-                <label htmlFor="price" className="block text-sm font-medium leading-6 text-gray-900">
+                <label htmlFor="waterIntake" className="block text-sm font-medium leading-6 text-gray-900">
                     Water Intake
                 </label>
                 <div className="relative mt-2 rounded-md shadow-sm">
                     <input
                     type="text"
-                    name="price"
-                    id="price"
+                    name="waterIntake"
+                    id="waterIntake"
                     className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     placeholder="0.00"
                     />

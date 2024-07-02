@@ -1,11 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
-import clientPromise from '../../../mongodb';
+import clientPromise from '../../mongodb';
 import { ObjectId } from 'mongodb';
-import { ExerciseLog } from '../types/exerciselog';
+import { ExerciseLog } from '../../(dashboard)/log/types/exerciselog';
 
 export async function POST(req: NextRequest) {
-    const exerciseLog: ExerciseLog = await req.json();
-
+    const exerciseLog = await req.json();
+    console.log(exerciseLog);
+    
     const client = await clientPromise;
     const db = client.db();
 
@@ -50,17 +51,12 @@ export async function DELETE(req: NextRequest) {
 export async function GET(req: NextRequest) {
     const { searchParams } = new URL(req.url);
     const userid = searchParams.get('userid') || '';
-    const page = parseInt(searchParams.get('page') || '0', 10);
-    const limit = 10;
-    const skip = page * limit;
 
     const client = await clientPromise;
     const db = client.db();
 
     const logs = await db.collection('ExerciseLogs')
-        .find({userId: userid })
-        .skip(skip)
-        .limit(limit)
+        .find({userId: userid, date: Date.now()})
         .toArray();
 
     return NextResponse.json(logs);

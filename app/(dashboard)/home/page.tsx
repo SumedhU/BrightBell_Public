@@ -12,8 +12,11 @@ export default function Home() {
         </header>
         <div>
             <p>All the insights will be present here.</p>
-            <LineChart></LineChart>
-            <BarChart></BarChart>
+            <div className="">
+              <LineChart></LineChart>
+              <BarChart></BarChart>
+            </div>
+            
             <DoughnutChart></DoughnutChart>
         </div>
       </>

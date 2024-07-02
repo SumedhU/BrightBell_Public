@@ -1,21 +1,22 @@
 import { ObjectId } from "mongodb";
 
 export interface ExerciseSet {
-    setNumber: number;
-    weightKg: number;
+    weight: number;
     reps: number;
+    unit: String;
 }
 
 export interface Exercise {
-    exerciseName: string;
+    name: string;
     sets: ExerciseSet[];
 }
 
 export interface ExerciseLog {
     userId: ObjectId;
     date: string;
-    startTime: string;
-    endTime: string;
+    currentWeight: number;
+    currentWeightUnit: String;
     waterIntakeLiters: number;
+    waterIntakeUnit: String;
     exercises: Exercise[];
 }
