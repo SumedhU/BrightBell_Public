@@ -2,6 +2,10 @@ import { NextRequest, NextResponse } from 'next/server';
 import clientPromise from '../../mongodb';
 import { ObjectId } from 'mongodb';
 import { ExerciseLog } from '../../(dashboard)/log/types/exerciselog';
+import { cookies } from 'next/headers';
+import jwt from 'jsonwebtoken';
+
+const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
 
 export async function POST(req: NextRequest) {
     const exerciseLog = await req.json();
@@ -49,15 +53,22 @@ export async function DELETE(req: NextRequest) {
 }
 
 export async function GET(req: NextRequest) {
-    const { searchParams } = new URL(req.url);
-    const userid = searchParams.get('userid') || '';
+    const userCookie = cookies().get("auth");
+        const cookieValue = userCookie?.value;
 
-    const client = await clientPromise;
-    const db = client.db();
+        if (!cookieValue) {
+            return NextResponse.json({ error: 'Cookie not found or invalid' }, { status: 401 });
+        }
 
-    const logs = await db.collection('ExerciseLogs')
-        .find({userId: userid, date: Date.now()})
-        .toArray();
+        const decodedToken = jwt.verify(cookieValue, JWT_SECRET) as { userId: string };
 
+        console.log(decodedToken.userId);
+
+        const client = await clientPromise;
+        const db = client.db();
+        const logs = await db.collection('ExerciseLogs')
+            .find({userId: decodedToken.userId})
+            .toArray();
+    
     return NextResponse.json(logs);
 }

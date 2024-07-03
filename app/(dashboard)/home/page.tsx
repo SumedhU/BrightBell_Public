@@ -10,13 +10,13 @@ import LineChart from "./graphs/linechart";
 export default function Home() {
   const router = useRouter();
 
-  useEffect(() => {
-    const cookies = parseCookies();
-    console.log('Checking cookies:', cookies);
-    if (!cookies.auth) {
-      router.push('/login');
-    }
-  }, [router]);
+  // useEffect(() => {
+  //   const cookies = parseCookies();
+  //   console.log('Checking cookies:', cookies);
+  //   if (!cookies.auth) {
+  //     router.push('/login');
+  //   }
+  // }, [router]);
 
   return (
     <>

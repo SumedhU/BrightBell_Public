@@ -1,6 +1,6 @@
 "use client";
 import axios from 'axios';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function Example() {
   const [exercises, setExercises] = useState([
@@ -126,6 +126,34 @@ export default function Example() {
       console.error('Error saving log:', err);
     }
   };
+
+  useEffect(() => {
+    const fetchLogData = async () => {
+      try {
+        const response = await axios.get('/api/log');
+        console.log("hello");
+        
+        if (response.data) {
+          const { currentWeight, currentWeightUnit, waterIntakeLiters, waterIntakeUnit, exercises } = response.data[0];
+          setExerciseLog({
+            ...exerciseLog,
+            currentWeight,
+            currentWeightUnit,
+            waterIntakeLiters,
+            waterIntakeUnit,
+            exercises
+          });
+          setExercises(exercises);
+          console.log(exercises);
+          
+        }
+      } catch (error) {
+        console.error('Error fetching log data:', error);
+      }
+    };
+    fetchLogData();
+
+  }, []);
 
   return (
     <form>

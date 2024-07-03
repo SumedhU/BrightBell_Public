@@ -1,5 +1,5 @@
 "use client";
-import { Fragment } from 'react';
+import { Fragment, useEffect } from 'react';
 import { destroyCookie } from 'nookies'; 
 import {
   Disclosure,
@@ -15,6 +15,8 @@ import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { usePathname, useRouter } from 'next/navigation';
 import { serialize } from 'cookie';
 import { NextResponse } from 'next/server';
+import { cookies } from 'next/headers';
+import axios from 'axios';
 
 const user = {
   name: 'Sumedh Udar',
@@ -50,6 +52,28 @@ export default function Header() {
      router.push('/login');
   };
 
+  const sendGetRequest = async () => {
+    var user;
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+      const response = await axios.get('/api/login', config);
+  
+      console.log('aaa', response.data);
+      user = response.data;
+    } catch (err) {
+      // Handle Error Here
+      console.error(err);
+    }
+  };
+  
+  useEffect(() => {
+    sendGetRequest();
+  }, []);
+  
   return (
     <>
       <Disclosure as="nav" className="border-b border-gray-200 bg-white">
