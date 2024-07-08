@@ -29,6 +29,7 @@ const navigation = [
   { name: 'Home', href: '/home', current: true },
   { name: 'Log', href: '/log', current: false },
   { name: 'History', href: '/history', current: false },
+  { name: 'Suggestion', href: '/suggestion', current: false },
 ];
 
 const userNavigation = [
@@ -59,9 +60,7 @@ export default function Header() {
           'Content-Type': 'application/json',
         },
       };
-      const response = await axios.get('/api/login', config);
-  
-      console.log('aaa', response.data);
+      const response = await axios.get(`/api/login?id=${localStorage.getItem('authToken')}`, config);
       user = response.data;
     } catch (err) {
       // Handle Error Here
@@ -112,14 +111,7 @@ export default function Header() {
                   </div>
                 </div>
                 <div className="hidden sm:ml-6 sm:flex sm:items-center">
-                  <button
-                    type="button"
-                    className="relative rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                  >
-                    <span className="absolute -inset-1.5" />
-                    <span className="sr-only">View notifications</span>
-                    <BellIcon className="h-6 w-6" aria-hidden="true" />
-                  </button>
+                
 
                   {/* Profile dropdown */}
                   <Menu as="div" className="relative ml-3">
@@ -202,14 +194,6 @@ export default function Header() {
                     <div className="text-base font-medium text-gray-800">{user.name}</div>
                     <div className="text-sm font-medium text-gray-500">{user.email}</div>
                   </div>
-                  <button
-                    type="button"
-                    className="relative ml-auto flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                  >
-                    <span className="absolute -inset-1.5" />
-                    <span className="sr-only">View notifications</span>
-                    <BellIcon className="h-6 w-6" aria-hidden="true" />
-                  </button>
                 </div>
                 <div className="mt-3 space-y-1">
                   {userNavigation.map((item) => (

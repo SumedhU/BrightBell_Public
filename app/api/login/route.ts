@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ error: 'Invalid password' }, { status: 400 });
         }
 
-        const token = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: '1h' });
+        const token = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: '100h' });
         return NextResponse.json({ message: 'Login successful', token });
     } catch (error) {
         console.error('Error during login:', error);
@@ -35,17 +35,10 @@ export async function POST(req: NextRequest) {
 
 export async function GET(req: NextRequest) {
     try {
-        const userCookie = cookies().get("auth");
-        const cookieValue = userCookie?.value;
-
-        if (!cookieValue) {
-            return NextResponse.json({ error: 'Cookie not found or invalid' }, { status: 401 });
-        }
-
-        const decodedToken = jwt.verify(cookieValue, JWT_SECRET) as { userId: string };
-
+        const { searchParams } = new URL(req.url);    
+        const userid = searchParams.get('id') || '';
+        const decodedToken = jwt.verify(userid, JWT_SECRET) as { userId: string };
         console.log(decodedToken.userId);
-        
         const client = await clientPromise;
         const db = client.db();
 
