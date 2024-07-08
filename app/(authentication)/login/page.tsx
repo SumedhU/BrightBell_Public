@@ -28,11 +28,12 @@ export default function Login() {
                 return;
             }
 
-            console.log(data.message);
+            console.log('Login successful:', data.message);
+            localStorage.setItem('authToken', data.token);
             router.push('/home');
         } catch (error) {
             setError('An unexpected error occurred');
-            console.error(error);
+            console.error('Login error:', error);
         }
     };
 

@@ -24,12 +24,13 @@ const user = {
   imageUrl:
     'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
 };
+
 const navigation = [
   { name: 'Home', href: '/home', current: true },
   { name: 'Log', href: '/log', current: false },
   { name: 'History', href: '/history', current: false },
-  // { name: 'Calendar', href: '#', current: false },
 ];
+
 const userNavigation = [
   { name: 'Your Profile', href: '/profile' },
   { name: 'Settings', href: '/settings' },
@@ -45,11 +46,9 @@ export default function Header() {
   const router = useRouter();
 
   const handleSignOut = () => {
-    const cookie = serialize('auth', "", { path: '/', httpOnly: true, maxAge: -3600 });
-    destroyCookie(null, 'auth', { path: '/' });
-    const response = NextResponse.json({ message: 'Logout successful' });
-    //response.headers.set('Set-Cookie', cookie);    
-     router.push('/login');
+    localStorage.removeItem('authToken'); 
+    //destroyCookie(null, 'auth', { path: '/' });
+    router.push('/login'); 
   };
 
   const sendGetRequest = async () => {

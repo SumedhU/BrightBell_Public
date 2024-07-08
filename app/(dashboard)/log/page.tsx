@@ -2,6 +2,17 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+export default function Log() {
+  const router = useRouter();
+  useEffect(() => {
+    const authToken = localStorage.getItem('authToken');
+    console.log('Checking authToken:', authToken);
+    if (!authToken) {
+      router.push('/login');
+    }
+  }, [router]);
 export default function Example() {
   const [exercises, setExercises] = useState([
     { name: '', sets: [{ weight: '', reps: '', unit: 'KG' }] }
