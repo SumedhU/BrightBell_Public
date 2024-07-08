@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import clientPromise from '../../mongodb';
 import { ObjectId } from 'mongodb';
+import jwt from 'jsonwebtoken';
 
+const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
 export async function DELETE(req: NextRequest) {
     const { id } = await req.json();
 
@@ -18,17 +20,19 @@ export async function DELETE(req: NextRequest) {
 }
 
 export async function GET(req: NextRequest) {
-    const { searchParams } = new URL(req.url);
-    const userid = searchParams.get('userid') || '';
+    const { searchParams } = new URL(req.url);    
+    const userid = searchParams.get('id') || '';
+    const decodedToken = jwt.verify(userid, JWT_SECRET) as { userId: string };
+
     const page = parseInt(searchParams.get('page') || '0', 10);
-    const limit = 10;
+    const limit = 100;
     const skip = page * limit;
 
     const client = await clientPromise;
     const db = client.db();
 
     const logs = await db.collection('ExerciseLogs')
-        .find({userId: userid })
+        .find({userId: decodedToken.userId})
         .skip(skip)
         .limit(limit)
         .toArray();
