@@ -9,12 +9,12 @@ export async function GET(req: NextRequest) {
     // return NextResponse.json({"heelo" : "hello"});
     const { searchParams } = new URL(req.url);
     const userid = searchParams.get('userid') || '';
-
+    console.log(userid+'userid is ');
     const client = await clientPromise;
     const db = client.db();
 
     const logs = await db.collection('FitnessEnthusiast')
-        .find({userid: userid }).toArray();
+        .find({ _id: new ObjectId(userid) }).toArray();
 
     return NextResponse.json(logs);
 }

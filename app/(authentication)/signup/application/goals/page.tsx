@@ -33,7 +33,7 @@ export default function Goals() {
     const storedLastname = sessionStorage.getItem('lastname');
     const storedPhone = sessionStorage.getItem('phone');
     const storedStartweight = sessionStorage.getItem('startweight');
-    const storedCurrentweight = sessionStorage.getItem('currentweight');
+    const storedCurrentweight = sessionStorage.getItem('startweight');
     const storedGoalweight = sessionStorage.getItem('goalweight');
     const storedWaterintake = sessionStorage.getItem('waterintake');
     const storedWorkoutIntensity = sessionStorage.getItem('workoutIntensity');

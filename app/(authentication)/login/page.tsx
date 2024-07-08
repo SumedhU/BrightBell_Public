@@ -1,5 +1,4 @@
-"use client";
-
+'use client';
 import React, { useState, FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
 
@@ -11,29 +10,29 @@ export default function Login() {
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
-
         try {
             const res = await fetch('/api/login', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ email, password }),
+                body: JSON.stringify({ email, password })
             });
 
-            const data = await res.json();
-
             if (!res.ok) {
-                setError(data.error || 'An unexpected error occurred');
-                return;
+                throw new Error('Failed to fetch data');
             }
 
-            console.log('Login successful:', data.message);
-            localStorage.setItem('authToken', data.token);
-            router.push('/home');
+            const data = await res.json();
+            if (data.userId) {
+                localStorage.setItem('userId', data.userId);
+                localStorage.setItem('authToken', data.token);
+                router.push('/home');
+            } else {
+                setError('Login failed. Please check your credentials.');
+            }
         } catch (error) {
-            setError('An unexpected error occurred');
-            console.error('Login error:', error);
+            //setError(error.message);
         }
     };
 
@@ -91,7 +90,11 @@ export default function Login() {
                             </div>
                         </div>
 
-                        {error && <p className="text-red-500 text-sm">{error}</p>}
+                        {error && (
+                            <div className="text-sm text-red-600">
+                                {error}
+                            </div>
+                        )}
 
                         <div>
                             <button
