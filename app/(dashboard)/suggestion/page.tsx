@@ -60,7 +60,7 @@ const ExercisePage: React.FC = () => {
 
   function formatInstructions(instructions: string) {
     return instructions.split('. ').map((instruction, index) => {
-      if (instruction.startsWith('Tip:')) {
+      if (instruction.startsWith('Tip:') || instruction.startsWith(' Tip:')) {
         return (
           <div key={index} className="flex items-center p-4 mt-2 bg-yellow-100 border border-yellow-400 rounded-md">
             <LightBulbIcon className="w-14 h-14 text-yellow-500 mr-2" />

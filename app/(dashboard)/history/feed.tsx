@@ -66,7 +66,7 @@ const Feed: React.FC = () => {
           content: log.exercises.length == 0 ?'No Workout': log.exercises.length < 5 ?'Light Workout': log.exercises.length < 11 ? 'Intense Workout': 'Extreme Workout', // Adjust based on your data structure
           currentWeight: log.currentWeight + " " + log.currentWeightUnit, // Adjust based on your data structure
           waterIntake: log.waterIntakeLiters + " " + log.waterIntakeUnit,
-          href: '#',
+          href: `history/${log._id}`,
           date: new Date(log.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }), // Adjust date format as needed
           datetime: log.date,
           icon: log.exercises.length == 0 ? HandThumbDownIcon : log.exercises.length < 5 ? HandThumbUpIcon: log.exercises.length < 11 ? StarIcon: BoltIcon, // Adjust icon selection based on data
