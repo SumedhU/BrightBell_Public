@@ -16,17 +16,21 @@ export async function POST(req: NextRequest) {
         const db = client.db();
 
         const user = await db.collection('FitnessEnthusiast').findOne({ email });
+
         if (!user) {
             return NextResponse.json({ error: 'User not found' }, { status: 400 });
         }
 
+        const firstname=user.firstname;
+        const lastname=user.lastname;
+        const fullname = firstname +' '+lastname;
         const isPasswordValid = await compare(password, user.password);
         if (!isPasswordValid) {
             return NextResponse.json({ error: 'Invalid password' }, { status: 400 });
         }
-
+        
         const token = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: '100h' });
-        return NextResponse.json({ message: 'Login successful', token });
+        return NextResponse.json({ message: 'Login successful', userId: user._id,token,fullname});
     } catch (error) {
         console.error('Error during login:', error);
         return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });

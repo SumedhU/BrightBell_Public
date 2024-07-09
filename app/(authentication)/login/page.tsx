@@ -24,9 +24,13 @@ export default function Login() {
             }
 
             const data = await res.json();
+            console.log(data);
+            
             if (data.userId) {
                 localStorage.setItem('userId', data.userId);
                 localStorage.setItem('authToken', data.token);
+                localStorage.setItem('firstname', data.fullname);
+                
                 router.push('/home');
             } else {
                 setError('Login failed. Please check your credentials.');
