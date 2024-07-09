@@ -31,7 +31,7 @@ export default function Login() {
                 localStorage.setItem('authToken', data.token);
                 localStorage.setItem('firstname', data.fullname);
                 
-                router.push('/home');
+                router.push('/');
             } else {
                 setError('Login failed. Please check your credentials.');
             }
