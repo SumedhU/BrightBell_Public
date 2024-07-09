@@ -198,7 +198,7 @@ export default function Log() {
     <form>
       <div className="space-y-12">
         <div className="border-b border-gray-900/10 pb-12">
-          <h1 className="text-3xl font-bold leading-tight tracking-tight pt-12 text-gray-900">Today's Log</h1>
+          <h1 className="text-3xl font-bold leading-tight tracking-tight pt-12 text-gray-900">Today&apos;s Log</h1>
           <p className="mt-1 text-sm leading-6 text-gray-600">
             Enter your daily log here.
           </p>
@@ -206,7 +206,7 @@ export default function Log() {
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
             <div className="sm:col-span-1">
               <label htmlFor="todaysWeight" className="block text-sm font-medium leading-6 text-gray-900">
-                Today's Weight
+                Today&apos;s Weight
               </label>
               <div className="relative mt-2 rounded-md shadow-sm">
                 <input
@@ -220,7 +220,7 @@ export default function Log() {
                 />
                 <div className="absolute inset-y-0 right-0 flex items-center">
                   <label htmlFor="todaysWeight" className="sr-only">
-                    Today's Weight
+                    Today&apos;s Weight
                   </label>
                   <select
                     id="todaysWeight"

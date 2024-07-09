@@ -81,7 +81,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                       <div className="items-center">
                         <span className="truncate font-medium">{exercise.name} </span>
                          Sets: {exercise.sets.map(set =>
-                            <p className="ml-4 flex-shrink-0 text-gray-400">
+                            <p key={set.reps} className="ml-4 flex-shrink-0 text-gray-400">
                                 {set.weight}{set.unit} x {set.reps}
                             </p>
                             )
