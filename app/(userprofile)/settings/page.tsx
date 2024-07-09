@@ -218,7 +218,7 @@ export default function Settings() {
                 </div>
             </div>
             <div className="sm:col-span-1">
-                <WorkoutIntensity />
+                {/* <WorkoutIntensity /> */}
             </div>
           </div>
         </div>
