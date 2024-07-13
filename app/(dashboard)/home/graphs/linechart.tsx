@@ -51,7 +51,7 @@ const LineChart = () => {
         data.forEach((exercise: any) => {
           const date = new Date(exercise.date);
           const month = date.getMonth(); 
-          weightData[month] += parseInt(exercise.currentWeight, 10);
+          weightData[month] = parseInt(exercise.currentWeight, 10);
         });
 
         setChartData(prevData => ({

@@ -32,10 +32,12 @@ export async function GET(req: NextRequest) {
     const db = client.db();
 
     const logs = await db.collection('ExerciseLogs')
-        .find({userId: decodedToken.userId})
-        .skip(skip)
-        .limit(limit)
-        .toArray();
+    .find({ userId: decodedToken.userId })
+    .sort({ date: 1 })  // Sort by date in descending order, change to 1 for ascending order
+    .skip(skip)
+    .limit(limit)
+    .toArray();
+  
 
     return NextResponse.json(logs);
 }

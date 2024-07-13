@@ -2,10 +2,12 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import UpdateModal from '@/app/ui/updateModal';
 
 export default function Log() {
   const router = useRouter();
   const [isNew, setIsNew] = useState(true);
+  const [showModal, setShowModal] = useState(false);
   const [exercises, setExercises] = useState([
     { name: '', sets: [{ weight: '', reps: '', unit: 'KG' }] }
   ]);
@@ -110,7 +112,6 @@ export default function Log() {
     updatedExercises[exerciseIndex].sets.splice(setIndex, 1);
     setExercises(updatedExercises);
   };
-
   const submitLog = async () => {
     if (!validateForm()) {
       return;
@@ -118,8 +119,7 @@ export default function Log() {
     const date = new Date();
     try {
       const logData = {
-        userId: 
-        localStorage.getItem('authToken'),
+        userId: localStorage.getItem('authToken'),
         date: date.toJSON().slice(0, 10),
         currentWeight: exerciseLog.currentWeight,
         currentWeightUnit: exerciseLog.currentWeightUnit,
@@ -127,14 +127,15 @@ export default function Log() {
         waterIntakeUnit: exerciseLog.waterIntakeUnit,
         exercises: exercises,
       };
-
+  
       const response = await axios.post('/api/log', logData);
       console.log(response);
+      setShowModal(true); // Show success modal
     } catch (err) {
       console.error('Error saving log:', err);
     }
   };
-
+  
   const updateLog = async () => {
     if (!validateForm()) {
       return;
@@ -142,21 +143,23 @@ export default function Log() {
     const date = new Date();
     try {
       const logData = {
-        userId: 
-        localStorage.getItem('authToken'),
+        userId: localStorage.getItem('authToken'),
+        date: date.toJSON().slice(0, 10),
         currentWeight: exerciseLog.currentWeight,
         currentWeightUnit: exerciseLog.currentWeightUnit,
         waterIntakeLiters: exerciseLog.waterIntakeLiters,
         waterIntakeUnit: exerciseLog.waterIntakeUnit,
         exercises: exercises,
       };
-
+  
       const response = await axios.put('/api/log', logData);
       console.log(response);
+      setShowModal(true); // Show success modal
     } catch (err) {
       console.error('Error saving log:', err);
     }
   };
+  
   useEffect(() => {
     const authToken = localStorage.getItem('authToken');
     console.log('Checking authToken:', authToken);
@@ -195,6 +198,7 @@ export default function Log() {
   }, [router, setExerciseLog, setExercises]);
 
   return (
+    <>
     <form>
       <div className="space-y-12">
         <div className="border-b border-gray-900/10 pb-12">
@@ -359,5 +363,9 @@ export default function Log() {
         </button>
       </div>
     </form>
+    {showModal && (
+      <UpdateModal showModal={showModal} setShowModal={setShowModal} />
+    )}
+    </>
   );
 }

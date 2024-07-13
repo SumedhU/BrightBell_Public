@@ -23,8 +23,10 @@ export async function PUT(req: NextRequest) {
     const decodedToken = jwt.verify(exerciseLog.userId, JWT_SECRET) as { userId: string };
     exerciseLog.userId = decodedToken.userId;
 
+    console.log(exerciseLog);
+    
     const result = await db.collection('ExerciseLogs').updateOne(
-        { userId : exerciseLog.userId },
+        { userId : exerciseLog.userId, date: exerciseLog.date },
         { $set: exerciseLog }
     );
 
@@ -62,7 +64,7 @@ export async function GET(req: NextRequest) {
         const client = await clientPromise;
         const db = client.db();
         const logs = await db.collection('ExerciseLogs')
-            .find({userId: decodedToken.userId})
+            .find({userId: decodedToken.userId, date: new Date().toJSON().slice(0, 10)})
             .toArray();
     
     return NextResponse.json(logs);

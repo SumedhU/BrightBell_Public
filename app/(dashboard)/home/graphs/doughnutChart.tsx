@@ -92,7 +92,7 @@ const DoughnutChart = () => {
   }, [firstname]); // Depend on firstname to trigger data fetching
 
   return (
-    <div style={{ width: '700px', height: '700px' }}>
+    <div style={{ width: '500px', height: '500px' }}>
       <h1>Types of workouts</h1>
       <Doughnut data={chartData} />
     </div>
