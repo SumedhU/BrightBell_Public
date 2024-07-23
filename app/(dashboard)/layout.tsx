@@ -18,7 +18,7 @@ export default function DashboardLayout({
         <div className="min-h-full">
           <Header />
           <main>
-            <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">{children}</div>
+            <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 bg-white">{children}</div>
           </main>
         </div>
   );

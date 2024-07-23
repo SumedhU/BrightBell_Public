@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Brightbell
 
-## Getting Started
+Brightbell is a fitness tracking app that allows users to log their daily fitness updates, view their history, and gain insights from their data.
 
-First, run the development server:
+## Table of Contents
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- [Features](#features)
+  - [Authentication and Authorisation](#authentication-and-authorisation)
+  - [Dashboard](#dashboard)
+  - [Daily Logger](#daily-logger)
+  - [Workout Recommendation and View History](#workout-recommendation-and-view-history)
+  - [Profile and Edit Profile](#profile-and-edit-profile)
+  - [Database Design](#database-design)
+- [Learning Curve and Challenges](#learning-curve-and-challenges)
+- [Installation](#installation)
+- [Contributing](#contributing)
+- [License](#license)
+- [Acknowledgements](#acknowledgements)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Authentication and Authorisation
+**Contributor:** Akshath
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+**Description:**  
+Implemented user authentication and authorization functionalities. This includes user registration, login, and secure access to personal fitness data.
 
-## Learn More
+**Learning Curve and Challenges:**  
+- **Learning Curve:** Learning about different authentication methods and integrating them into a Next.js application.
+- **Challenges:** Ensuring secure data storage and implementing robust authorization checks to protect user data.
 
-To learn more about Next.js, take a look at the following resources:
+### Dashboard
+**Contributor:** Kunal
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**Description:**  
+Developed the dashboard that presents users with graphs and charts to provide insights into their fitness activities over time. This includes tracking progress, trends, and other relevant statistics.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+**Learning Curve and Challenges:**  
+- **Learning Curve:** Learning how to integrate data visualization libraries and customize them for dynamic data representation.
+- **Challenges:** Ensuring real-time data updates and maintaining performance while rendering complex graphs and charts.
 
-## Deploy on Vercel
+### Daily Logger
+**Contributor:** Sumedh
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**Description:**  
+Created the daily logger feature, allowing users to log their daily workouts and activities. This includes input forms for various fitness activities and storing this data for future reference.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+**Learning Curve and Challenges:**  
+- **Learning Curve:** Understanding how to manage state and handle form inputs efficiently in a Next.js application.
+- **Challenges:** Ensuring data consistency and handling edge cases where users might input incorrect or incomplete data.
+
+### Workout Recommendation and View History
+**Contributor:** Shr
