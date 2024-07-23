@@ -1,4 +1,4 @@
-# [https://bright-bell.vercel.app/home](Brightbell)
+#[Brightbell](https://bright-bell.vercel.app/home)
 
 Brightbell is a fitness tracking app that allows users to log their daily fitness updates, view their history, and gain insights from their data.
 
