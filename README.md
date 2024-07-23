@@ -13,9 +13,6 @@ Brightbell is a fitness tracking app that allows users to log their daily fitnes
   - [Database Design](#database-design)
 - [Learning Curve and Challenges](#learning-curve-and-challenges)
 - [Installation](#installation)
-- [Contributing](#contributing)
-- [License](#license)
-- [Acknowledgements](#acknowledgements)
 
 ## Features
 
@@ -120,15 +117,3 @@ Designed the database schema to store and manage all user data, workout logs, an
     ```bash
     npm run dev
     ```
-
-## Contributing
-
-We welcome contributions from the community. Please read our [contributing guidelines](CONTRIBUTING.md) for more information.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Acknowledgements
-
-We would like to thank everyone who contributed to the development of Brightbell and helped us bring this project to life. Your support and feedback have been invaluable.
